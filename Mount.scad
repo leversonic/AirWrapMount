@@ -33,6 +33,7 @@ module MountBody() {
 		for(i = [0:accessoryIndentationCount - 1]) {
 			translate([bodyBackThickness + topShelfDepth / 2, accessoryTabDiameter / 2 + topShelfHorizontalPadding + (bodyWidth - 2 * topShelfHorizontalPadding - accessoryTabDiameter) * i / (accessoryIndentationCount - 1), bodyBackHeight - topShelfVerticalOffset]) AccessoryIndentation();
 		}
+		translate([bodyBackThickness + topShelfDepth + 0.99, bodyWidth / 8, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([0, -90, 0]) linear_extrude(1) scale((topShelfThickness - 8) / 118) SmoothingBrushIcon();
 	}
 }
 
@@ -44,4 +45,15 @@ module AccessoryIndentation() {
 	}
 }
 
+module SmoothingBrushIcon() {
+	difference() {
+		offset(10) square([118, 64]);
+		square([118, 64]);
+	}
+	for(i = [0:3]) {
+		for(j = [0:5]) {
+			translate([j * 432 / 23 + 12, i * 81 / 6 + 12, 0]) circle(3, $fn=25);
+		}
+	}
+}
 MountBody();
