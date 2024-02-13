@@ -2,6 +2,7 @@ bodyWidth = 342.9;
 bodyBackThickness = 10;
 bodyBackHeight = 180;
 baseHolsterRadius = 25;
+baseHolsterLipLength = 25;
 topShelfVerticalOffset = 25;
 topShelfDepth = 65;
 topShelfThickness = 15;
@@ -18,10 +19,14 @@ module MountBody() {
 	difference() {
 		union() {
 			translate([0, bodyWidth, 0]) rotate([90, 0, 0]) linear_extrude(bodyWidth) square([bodyBackThickness, bodyBackHeight + 0]);
-			translate([bodyBackThickness + baseHolsterRadius, 0, 0]) rotate([0, -90, -90]) difference() {
-				linear_extrude(bodyWidth) circle(baseHolsterRadius + bodyBackThickness);
-				translate([0, 0, -0.5]) linear_extrude(bodyWidth + 1) circle(baseHolsterRadius);
-				translate([0, -baseHolsterRadius - bodyBackThickness, -0.5]) linear_extrude(bodyWidth + 1) square(2 * baseHolsterRadius + 2 * bodyBackThickness + 1);
+			translate([bodyBackThickness + baseHolsterRadius, 0, 0]) rotate([0, -90, -90]) union() {
+				outerCircleRadius = baseHolsterRadius + bodyBackThickness;
+				difference() {
+					linear_extrude(bodyWidth) circle(outerCircleRadius);
+					translate([0, 0, -0.5]) linear_extrude(bodyWidth + 1) circle(baseHolsterRadius);
+					translate([0, 0, -0.5]) linear_extrude(bodyWidth + 1) polygon([[outerCircleRadius + 1, outerCircleRadius + 1], [-outerCircleRadius - 1, outerCircleRadius + 1], [-outerCircleRadius, outerCircleRadius], [0, 0], [0, -outerCircleRadius - 1], [outerCircleRadius + 1, -outerCircleRadius - 1 ]]);
+				}
+				translate([-outerCircleRadius * sin(45), outerCircleRadius * sin(45), 0]) rotate([0, 0, -45]) linear_extrude(bodyWidth) square([bodyBackThickness, baseHolsterLipLength]);
 			}
 			translate([bodyBackThickness + topShelfDepth, 0, bodyBackHeight - topShelfVerticalOffset - topShelfThickness]) rotate([0, 0, 90]) linear_extrude(topShelfThickness) square([bodyWidth, topShelfDepth]);
 		}
