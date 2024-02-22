@@ -42,6 +42,7 @@ module MountBody() {
 				translate(calculateIndentationCenter(i)) AccessoryIndentation();
 			}
 			translate([bodyBackThickness + topShelfDepth + 0.99, bodyWidth / 8, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([0, -90, 0]) linear_extrude(1) scale((topShelfThickness - 8) / 118) SmoothingBrushIcon();
+			translate([bodyBackThickness + topShelfDepth + 0.99, 3 * bodyWidth / 8, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([0, -90, 0]) linear_extrude(1) scale((topShelfThickness - 8) / 118) VolumizingBrushIcon();
 		}
 		translate([0, 0, -accessoryIndentationDepth - 0.01]) translate(calculateIndentationCenter(0)) SmoothingBrushSupportBeam();
 	}
@@ -73,4 +74,17 @@ module SmoothingBrushSupportBeam() {
 		translate([-smoothingBrushInnerDiameter / 2, smoothingBrushInnerDiameter / 2, 0]) rotate([90, 0, 0]) linear_extrude(smoothingBrushInnerDiameter + 1) polygon([[0, 0], [0, smoothingBrushInnerTopHeight], [smoothingBrushInnerTopHorizontalOffset, smoothingBrushInnerTopHeight], [smoothingBrushInnerDiameter - smoothingBrushInnerBottomHorizontalOffset, smoothingBrushInnerBottomHeight], [smoothingBrushInnerDiameter, smoothingBrushInnerBottomHeight], [smoothingBrushInnerDiameter, 0]]);
 	}
 }
+
+module VolumizingBrushIcon() {
+	translate([126, 17.5, 0]) circle(8);
+	difference() {
+		offset(8) square([118, 35]);
+		square([118, 35]);
+	}
+	for(i = [0:9]) {
+		translate([i * 11 + 4, 43, 0]) square([4, 15]);
+		translate([i * 11 + 4, -23, 0]) square([4, 15]);
+	}
+}
+
 MountBody();
