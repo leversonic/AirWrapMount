@@ -1,3 +1,6 @@
+use <SmoothingBrush.scad>;
+use <VolumizingBrush.scad>;
+
 bodyWidth = 342.9;
 bodyBackThickness = 10;
 bodyBackHeight = 180;
@@ -13,11 +16,6 @@ accessoryTabWidth = 4.5;
 accessoryIndentationBottomDiameter = 36;
 accessoryIndentationTopDiameter = 40;
 accessoryIndentationCount = 4;
-smoothingBrushInnerTopHeight = 52;
-smoothingBrushInnerTopHorizontalOffset = 2;
-smoothingBrushInnerBottomHeight = 26;
-smoothingBrushInnerBottomHorizontalOffset = 7;
-smoothingBrushInnerDiameter = 31;
 $fn = 500;
 
 function calculateIndentationCenter(index) = [bodyBackThickness + topShelfDepth / 2, accessoryTabDiameter / 2 + topShelfHorizontalPadding + (bodyWidth - 2 * topShelfHorizontalPadding - accessoryTabDiameter) * index / (accessoryIndentationCount - 1), bodyBackHeight - topShelfVerticalOffset];
@@ -45,6 +43,7 @@ module MountBody() {
 			translate([bodyBackThickness + topShelfDepth + 0.99, 3 * bodyWidth / 8, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([0, -90, 0]) linear_extrude(1) scale((topShelfThickness - 8) / 118) VolumizingBrushIcon();
 		}
 		translate([0, 0, -accessoryIndentationDepth - 0.01]) translate(calculateIndentationCenter(0)) SmoothingBrushSupportBeam();
+		translate([0, 0, -accessoryIndentationDepth - 0.01]) translate(calculateIndentationCenter(1)) VolumizingBrushSupportBeam();
 	}
 }
 
@@ -53,37 +52,6 @@ module AccessoryIndentation() {
 		cylinder(h=accessoryIndentationDepth, d1=accessoryIndentationBottomDiameter, d2=accessoryIndentationTopDiameter, center=true);
 		translate([-accessoryTabWidth / 2, -accessoryTabDiameter / 2, -accessoryIndentationDepth / 2]) linear_extrude(accessoryIndentationDepth) square([accessoryTabWidth, accessoryTabDiameter]);
 		rotate([0, 0, 90]) translate([-accessoryTabWidth / 2, -accessoryTabDiameter / 2, -accessoryIndentationDepth / 2]) linear_extrude(accessoryIndentationDepth) square([accessoryTabWidth, accessoryTabDiameter]);
-	}
-}
-
-module SmoothingBrushIcon() {
-	difference() {
-		offset(10) square([118, 64]);
-		square([118, 64]);
-	}
-	for(i = [0:3]) {
-		for(j = [0:5]) {
-			translate([j * 432 / 23 + 12, i * 81 / 6 + 12, 0]) circle(3, $fn=25);
-		}
-	}
-}
-
-module SmoothingBrushSupportBeam() {
-	intersection() {
-		cylinder(smoothingBrushInnerTopHeight, d=smoothingBrushInnerDiameter);
-		translate([-smoothingBrushInnerDiameter / 2, smoothingBrushInnerDiameter / 2, 0]) rotate([90, 0, 0]) linear_extrude(smoothingBrushInnerDiameter + 1) polygon([[0, 0], [0, smoothingBrushInnerTopHeight], [smoothingBrushInnerTopHorizontalOffset, smoothingBrushInnerTopHeight], [smoothingBrushInnerDiameter - smoothingBrushInnerBottomHorizontalOffset, smoothingBrushInnerBottomHeight], [smoothingBrushInnerDiameter, smoothingBrushInnerBottomHeight], [smoothingBrushInnerDiameter, 0]]);
-	}
-}
-
-module VolumizingBrushIcon() {
-	translate([126, 17.5, 0]) circle(8);
-	difference() {
-		offset(8) square([118, 35]);
-		square([118, 35]);
-	}
-	for(i = [0:9]) {
-		translate([i * 11 + 4, 43, 0]) square([4, 15]);
-		translate([i * 11 + 4, -23, 0]) square([4, 15]);
 	}
 }
 
