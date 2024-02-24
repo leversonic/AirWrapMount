@@ -1,0 +1,11 @@
+bodyWidth = 342.9;
+bodyBackThickness = 10;
+bodyBackHeight = 180;
+baseHolsterRadius = 25;
+baseHolsterLipLength = 25;
+topShelfVerticalOffset = 25;
+topShelfDepth = 65;
+topShelfThickness = 15;
+topShelfHorizontalPadding = 25;
+indentationCount = 4;
+indentationDepth = 7;
