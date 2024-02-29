@@ -4,7 +4,7 @@ use <AccessoryIndentation.scad>;
 use <Barrel.scad>;
 include <Shared.scad>;
 
-$fn = 1000;
+$fn = 200;
 
 module MountBody() {
 		union() {
@@ -22,9 +22,10 @@ module MountBody() {
 					}
 					translate([bodyBackThickness + topShelfDepth, 0, bodyBackHeight - topShelfVerticalOffset - topShelfThickness]) rotate([0, 0, 90]) linear_extrude(topShelfThickness) square([bodyWidth, topShelfDepth]);
 				}
-				for(i = [0:indentationCount - 1]) {
-					translate(calculateIndentationCenter(i)) AccessoryIndentation();
-				}
+				translate(calculateIndentationCenter(0)) AccessoryIndentation();
+				translate(calculateIndentationCenter(1)) AccessoryIndentation(false);
+				translate(calculateIndentationCenter(2)) AccessoryIndentation(false);
+				translate(calculateIndentationCenter(3)) AccessoryIndentation();
 				translate([bodyBackThickness + topShelfDepth + 0.99, bodyWidth / 8, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([0, -90, 0]) linear_extrude(1) scale((topShelfThickness - 8) / 118) SmoothingBrushIcon();
 				translate([bodyBackThickness + topShelfDepth + 0.99, 3 * bodyWidth / 8, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([0, -90, 0]) linear_extrude(1) scale((topShelfThickness - 8) / 118) VolumizingBrushIcon();
 				translate([bodyBackThickness + topShelfDepth + 0.99, 5 * bodyWidth / 8 + 0.5, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([-90, 180, 90]) linear_extrude(1) scale((topShelfThickness - 8) / 18) BarrelIcon();

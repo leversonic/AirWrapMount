@@ -1,6 +1,6 @@
-innerTopHeight = 52;
+innerTopHeight = 47;
 innerTopHorizontalOffset = 2;
-innerBottomHeight = 26;
+innerBottomHeight = 21;
 innerBottomHorizontalOffset = 7;
 innerDiameter = 31;
 

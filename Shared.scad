@@ -7,5 +7,4 @@ topShelfVerticalOffset = 25;
 topShelfDepth = 65;
 topShelfThickness = 15;
 topShelfHorizontalPadding = 25;
-indentationCount = 4;
 indentationDepth = 7;
