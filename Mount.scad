@@ -2,6 +2,7 @@ use <SmoothingBrush.scad>;
 use <VolumizingBrush.scad>;
 use <AccessoryIndentation.scad>;
 use <Barrel.scad>;
+use <SmoothingDryer.scad>;
 include <Shared.scad>;
 
 $fn = 200;
@@ -29,10 +30,12 @@ module MountBody() {
 				translate([bodyBackThickness + topShelfDepth + 0.99, bodyWidth / 8, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([0, -90, 0]) linear_extrude(1) scale((topShelfThickness - 8) / 118) SmoothingBrushIcon();
 				translate([bodyBackThickness + topShelfDepth + 0.99, 3 * bodyWidth / 8, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([0, -90, 0]) linear_extrude(1) scale((topShelfThickness - 8) / 118) VolumizingBrushIcon();
 				translate([bodyBackThickness + topShelfDepth + 0.99, 5 * bodyWidth / 8 + 0.5, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([-90, 180, 90]) linear_extrude(1) scale((topShelfThickness - 8) / 18) BarrelIcon();
+				translate([bodyBackThickness + topShelfDepth - 0.99, 7 * bodyWidth / 8 - 4.5, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([-90, 180, -90]) linear_extrude(1) scale((topShelfThickness - 8) / 35) SmoothingDryerIcon();
 			}
 			translate([0, 0, -indentationDepth - 0.01]) translate(calculateIndentationCenter(0)) SmoothingBrushSupportBeam();
 			translate([0, 0, -indentationDepth - 0.01]) translate(calculateIndentationCenter(1)) VolumizingBrushSupportBeam();
 			translate([0, 0, -indentationDepth - 0.01]) translate(calculateIndentationCenter(2)) BarrelSupportBeam();
+			translate([0, 0, -indentationDepth - 0.01]) translate(calculateIndentationCenter(3)) SmoothingDryerSupportBeam();
 		}
 }
 
