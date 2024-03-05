@@ -3,6 +3,7 @@ use <VolumizingBrush.scad>;
 use <AccessoryIndentation.scad>;
 use <Barrel.scad>;
 use <SmoothingDryer.scad>;
+use <Diffuser.scad>;
 include <Shared.scad>;
 
 $fn = 200;
