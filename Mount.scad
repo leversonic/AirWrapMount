@@ -40,4 +40,34 @@ module MountBody() {
 		}
 }
 
-MountBody();
+module AngleMount() {
+	depth = topShelfDepth + bodyBackThickness;
+	angle = 20;
+	mountPoints = [
+		[0, 0, 0],
+		[depth, 0, 0],
+		[depth, 0, -topShelfThickness],
+		[bodyBackThickness, 0, -depth / 2],
+		[0, 0, -depth / 2],
+		[0, sin(angle) * depth, -depth / 2],
+		[sin(angle) * depth, sin(angle) * depth + cos(angle) * depth, -depth / 2],
+		[(1 + sin(angle)) * depth, cos(angle) * depth, -depth / 2],
+		[0, sin(angle) * depth, 0]];
+	mountFaces = [
+		[4, 3, 2, 1, 0],
+		[0, 1, 8],
+		[1, 7, 6, 8],
+		[1, 2, 7],
+		[2, 3, 7],
+		[3, 4, 5, 6, 7],
+		[8, 6, 5],
+		[8, 5, 4, 0]
+	];
+	polyhedron(mountPoints, mountFaces, convexity=10);
+}
+
+union() {
+	translate([0, 0, bodyBackHeight - topShelfVerticalOffset]) mirror([0, 1, 0]) AngleMount();
+	translate([0, bodyWidth, bodyBackHeight - topShelfVerticalOffset]) AngleMount();
+	MountBody();
+}
