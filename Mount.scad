@@ -4,6 +4,7 @@ use <AccessoryIndentation.scad>;
 use <Barrel.scad>;
 use <SmoothingDryer.scad>;
 use <Diffuser.scad>;
+use <WideToothComb.scad>;
 include <Shared.scad>;
 
 $fn = 200;
@@ -74,6 +75,6 @@ module AngleMount(angle, supportBeam) {
 union() {
 	angle = 30;
 	translate([0, 0, bodyBackHeight - topShelfVerticalOffset]) mirror([0, 1, 0]) AngleMount(angle) DiffuserSupportBeam();
-	translate([0, bodyWidth, bodyBackHeight - topShelfVerticalOffset]) AngleMount(angle);
+	translate([0, bodyWidth, bodyBackHeight - topShelfVerticalOffset]) AngleMount(angle) WideToothCombSupportBeam();
 	MountBody();
 }
