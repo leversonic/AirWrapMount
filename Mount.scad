@@ -40,34 +40,40 @@ module MountBody() {
 		}
 }
 
-module AngleMount() {
+module AngleMount(angle, supportBeam) {
 	depth = topShelfDepth + bodyBackThickness;
-	angle = 20;
 	mountPoints = [
 		[0, 0, 0],
-		[depth, 0, 0],
+		[depth, 0, 0],//top right
 		[depth, 0, -topShelfThickness],
-		[bodyBackThickness, 0, -depth / 2],
-		[0, 0, -depth / 2],
-		[0, sin(angle) * depth, -depth / 2],
-		[sin(angle) * depth, sin(angle) * depth + cos(angle) * depth, -depth / 2],
-		[(1 + sin(angle)) * depth, cos(angle) * depth, -depth / 2],
-		[0, sin(angle) * depth, 0]];
+		[bodyBackThickness, 0, -depth],
+		[0, 0, -depth],
+		[0, sin(angle) * depth, -depth],
+		[sin(angle) * depth, tan(angle) * depth + cos(angle) * depth, -depth],//bottom left
+		[(1 + sin(angle)) * depth, cos(angle) * depth, -depth],//bottom right
+		[0, tan(angle) * depth, 0]];//top left
 	mountFaces = [
-		[4, 3, 2, 1, 0],
-		[0, 1, 8],
-		[1, 7, 6, 8],
-		[1, 2, 7],
-		[2, 3, 7],
-		[3, 4, 5, 6, 7],
-		[8, 6, 5],
-		[8, 5, 4, 0]
+		[0, 1, 2, 3, 4],
+		[8, 1, 0],
+		[8, 6, 7, 1],
+		[7, 2, 1],
+		[7, 3, 2],
+		[7, 6, 5, 4, 3],
+		[5, 6, 8],
+		[0, 4, 5, 8]
 	];
-	polyhedron(mountPoints, mountFaces, convexity=10);
+	union() {
+		difference() {
+			polyhedron(mountPoints, mountFaces, convexity=10);
+			translate([(1 + sin(angle)) * depth / 2, (tan(angle) + cos(angle)) * depth / 2, -depth / 2]) rotate([0, 45, 90 - angle]) translate([0, 0, 1.77]) AccessoryIndentation();
+		}
+		translate([(1 + sin(angle)) * depth / 2, (tan(angle) + cos(angle)) * depth / 2, -depth / 2]) rotate([0, 45, 90 - angle]) translate([0, 0, -indentationDepth]) children();
+	}
 }
 
 union() {
-	translate([0, 0, bodyBackHeight - topShelfVerticalOffset]) mirror([0, 1, 0]) AngleMount();
-	translate([0, bodyWidth, bodyBackHeight - topShelfVerticalOffset]) AngleMount();
+	angle = 30;
+	translate([0, 0, bodyBackHeight - topShelfVerticalOffset]) mirror([0, 1, 0]) AngleMount(angle) DiffuserSupportBeam();
+	translate([0, bodyWidth, bodyBackHeight - topShelfVerticalOffset]) AngleMount(angle);
 	MountBody();
 }
