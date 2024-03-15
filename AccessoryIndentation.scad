@@ -6,7 +6,7 @@ largeNotchWidth = 6;
 indentationBottomDiameter = 36;
 indentationTopDiameter = 40;
 
-function calculateIndentationCenter(index) = [bodyBackThickness + topShelfDepth / 2, notchDiameter / 2 + topShelfHorizontalPadding + (bodyWidth - 2 * topShelfHorizontalPadding - notchDiameter) * index / 3, bodyBackHeight - topShelfVerticalOffset];
+function calculateIndentationCenter(index) = [bodyBackThickness + topShelfDepth / 2, notchDiameter / 2 + topShelfHorizontalPadding + (frontWidth - 2 * topShelfHorizontalPadding - notchDiameter) * index / 3, bodyBackHeight - topShelfVerticalOffset];
 
 
 module AccessoryIndentation(notch=true) {
