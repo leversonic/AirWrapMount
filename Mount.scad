@@ -14,12 +14,16 @@ module MountBody() {
 		difference() {
 			union() {
 				bodyOffset = (bodyBackThickness + topShelfDepth) * tan(wingAngle);
-				translate([0, bodyWidth - bodyOffset, 0]) rotate([90, 0, 0]) linear_extrude(bodyWidth) polygon([
-					[0, 0],
-					[0, bodyBackHeight],
-					[bodyBackThickness, bodyBackHeight - (topShelfDepth + bodyBackThickness) / 2],
-					[bodyBackThickness, 0]]);
-				translate([bodyBackThickness + baseHolsterRadius, -bodyOffset, 0]) rotate([0, -90, -90]) union() {
+				difference() {
+					translate([0, bodyWidth - bodyOffset + tan(wingAngle) * bodyBackThickness, 0]) rotate([90, 0, 0]) linear_extrude(bodyWidth) polygon([
+						[0, 0],
+						[0, bodyBackHeight],
+						[bodyBackThickness, bodyBackHeight],
+						[bodyBackThickness, 0]]);
+					#translate([-0.01, -tan(wingAngle) * topShelfDepth + mountHoleHorizontalPadding, bodyBackHeight - mountHoleVerticalPadding]) rotate([0, 90, 0]) linear_extrude(bodyBackThickness + 0.02) circle(mountHoleRadius);
+					#translate([-0.01, -tan(wingAngle) * topShelfDepth + mountHoleHorizontalPadding + mountHoleSpacing, bodyBackHeight - mountHoleVerticalPadding]) rotate([0, 90, 0]) linear_extrude(bodyBackThickness + 0.02) circle(mountHoleRadius);
+				}
+				translate([bodyBackThickness + baseHolsterRadius, tan(wingAngle) * bodyBackThickness - bodyOffset, 0]) rotate([0, -90, -90]) union() {
 					outerCircleRadius = baseHolsterRadius + bodyBackThickness;
 					difference() {
 						linear_extrude(bodyWidth) circle(outerCircleRadius);
@@ -79,6 +83,6 @@ module AngleMount(angle, notchRotation = 0) {
 	}
 }
 
-translate([0, (tan(30) + cos(30)) * (topShelfDepth + bodyBackThickness), 0]) union() {
+translate([0, (tan(wingAngle) + cos(wingAngle)) * (topShelfDepth + bodyBackThickness), 0]) union() {
 	MountBody();
 }
