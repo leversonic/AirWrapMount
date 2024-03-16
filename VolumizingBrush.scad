@@ -11,8 +11,8 @@ module VolumizingBrushIcon() {
 		square([118, 35]);
 	}
 	for(i = [0:9]) {
-		translate([i * 11 + 4, 43, 0]) square([4, 15]);
-		translate([i * 11 + 4, -23, 0]) square([4, 15]);
+		translate([i * 11 + 4, 42.5, 0]) square([4, 15]);
+		translate([i * 11 + 4, -22.5, 0]) square([4, 15]);
 	}
 }
 
