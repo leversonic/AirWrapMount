@@ -20,8 +20,10 @@ module MountBody() {
 						[0, bodyBackHeight],
 						[bodyBackThickness, bodyBackHeight],
 						[bodyBackThickness, 0]]);
-					#translate([-0.01, -tan(wingAngle) * topShelfDepth + mountHoleHorizontalPadding, bodyBackHeight - mountHoleVerticalPadding]) rotate([0, 90, 0]) linear_extrude(bodyBackThickness + 0.02) circle(mountHoleRadius);
-					#translate([-0.01, -tan(wingAngle) * topShelfDepth + mountHoleHorizontalPadding + mountHoleSpacing, bodyBackHeight - mountHoleVerticalPadding]) rotate([0, 90, 0]) linear_extrude(bodyBackThickness + 0.02) circle(mountHoleRadius);
+					translate([-0.01, -tan(wingAngle) * topShelfDepth + mountHoleHorizontalPadding, bodyBackHeight - mountHoleVerticalPadding]) rotate([0, 90, 0]) linear_extrude(bodyBackThickness + 0.02) circle(mountHoleRadius);
+					translate([bodyBackThickness * 4 / 5 + 0.01, -tan(wingAngle) * topShelfDepth + mountHoleHorizontalPadding, bodyBackHeight - mountHoleVerticalPadding]) rotate([0, 90, 0]) linear_extrude(bodyBackThickness / 5) circle(mountScrewHeadRadius);
+					translate([-0.01, -tan(wingAngle) * topShelfDepth + mountHoleHorizontalPadding + mountHoleSpacing, bodyBackHeight - mountHoleVerticalPadding]) rotate([0, 90, 0]) linear_extrude(bodyBackThickness + 0.02) circle(mountHoleRadius);
+					translate([bodyBackThickness * 4 / 5 + 0.01, -tan(wingAngle) * topShelfDepth + mountHoleHorizontalPadding + mountHoleSpacing, bodyBackHeight - mountHoleVerticalPadding]) rotate([0, 90, 0]) linear_extrude(bodyBackThickness / 5) circle(mountScrewHeadRadius);
 				}
 				translate([bodyBackThickness + baseHolsterRadius, tan(wingAngle) * bodyBackThickness - bodyOffset, 0]) rotate([0, -90, -90]) union() {
 					outerCircleRadius = baseHolsterRadius + bodyBackThickness;

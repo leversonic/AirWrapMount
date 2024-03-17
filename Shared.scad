@@ -13,4 +13,5 @@ indentationDepth = 7;
 mountHoleSpacing = 282.5;
 mountHoleHorizontalPadding = (bodyWidth - mountHoleSpacing) / 2;
 mountHoleVerticalPadding = topShelfVerticalOffset / 2;
-mountHoleRadius = 2; // TODO: Find dimension for real screw
+mountHoleRadius = 2;
+mountScrewHeadRadius = 4.5;
