@@ -35,8 +35,14 @@ module MountBody() {
 					translate([-outerCircleRadius * sin(45), outerCircleRadius * sin(45), 0]) rotate([0, 0, -45]) linear_extrude(bodyWidth) square([bodyBackThickness, baseHolsterLipLength]);
 				}
 				translate([bodyBackThickness + topShelfDepth, 0, bodyBackHeight - topShelfVerticalOffset - topShelfThickness]) rotate([0, 0, 90]) linear_extrude(topShelfThickness) square([frontWidth, topShelfDepth + bodyBackThickness]);
-			translate([0, 0, bodyBackHeight - topShelfVerticalOffset]) mirror([0, 1, 0]) AngleMount(wingAngle) DiffuserSupportBeam();
-			translate([0, frontWidth, bodyBackHeight - topShelfVerticalOffset]) AngleMount(wingAngle, -30 / PI) WideToothCombSupportBeam();
+				translate([0, 0, bodyBackHeight - topShelfVerticalOffset]) mirror([0, 1, 0]) AngleMount(wingAngle) {
+					DiffuserSupportBeam();
+					DiffuserIcon();
+				}
+				translate([0, frontWidth, bodyBackHeight - topShelfVerticalOffset]) AngleMount(wingAngle, -28 / PI) {
+					WideToothCombSupportBeam();
+					WideToothCombIcon();
+				}
 			}
 			translate(calculateIndentationCenter(0)) AccessoryIndentation();
 			translate(calculateIndentationCenter(1)) AccessoryIndentation(false);
@@ -76,12 +82,15 @@ module AngleMount(angle, notchRotation = 0) {
 		[5, 6, 8],
 		[0, 4, 5, 8]
 	];
-	union() {
-		difference() {
-			polyhedron(mountPoints, mountFaces, convexity=10);
-			translate([(1 + sin(angle)) * depth / 2, (tan(angle) + cos(angle)) * depth / 2, -depth / 2]) rotate([0, 45, 90 - angle]) translate([0, 0, 1.77]) rotate([0, 0, notchRotation]) AccessoryIndentation();
+	difference() {
+		union() {
+			difference() {
+				polyhedron(mountPoints, mountFaces, convexity=10);
+				translate([(1 + sin(angle)) * depth / 2, (tan(angle) + cos(angle)) * depth / 2, -depth / 2]) rotate([0, 45, 90 - angle]) translate([0, 0, 1.77]) rotate([0, 0, notchRotation]) AccessoryIndentation();
+			}
+			translate([(1 + sin(angle)) * depth / 2, (tan(angle) + cos(angle)) * depth / 2, -depth / 2]) rotate([0, 45, 90 - angle]) translate([0, 0, -indentationDepth]) children(0);
 		}
-		translate([(1 + sin(angle)) * depth / 2, (tan(angle) + cos(angle)) * depth / 2, -depth / 2]) rotate([0, 45, 90 - angle]) translate([0, 0, -indentationDepth]) children();
+	translate([(1 + sin(angle)) * depth / 2, (tan(angle) + cos(angle)) * depth / 2, -depth / 2]) rotate([0, 45, 90 - angle]) translate([depth / 2, 0, 0]) scale([0.5, 0.5, 1]) children(1);
 	}
 }
 

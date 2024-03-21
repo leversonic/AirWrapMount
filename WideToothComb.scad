@@ -7,7 +7,15 @@ lowerHeight = 29;
 upperHeight = 55;
 
 module WideToothCombIcon() {
-	// TODO: Implement
+	scale([0.625, 0.625, 1]) {
+		difference() {
+			square([22, 17], center=true);
+			square([20, 15], center=true);
+		}
+		for(i = [1.5:3:19.5]) {
+			translate([i - 11, 8.5, 0]) square([1, 17]);
+		}
+	}
 }
 
 module WideToothCombSupportBeam() {
