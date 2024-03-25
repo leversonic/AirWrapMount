@@ -10,9 +10,9 @@ module VolumizingBrushIcon() {
 		offset(8) square([118, 35]);
 		square([118, 35]);
 	}
-	for(i = [0:9]) {
-		translate([i * 11 + 4, 42.5, 0]) square([4, 15]);
-		translate([i * 11 + 4, -22.5, 0]) square([4, 15]);
+	for(i = [0:4]) {
+		translate([i * 22 + 10, 42.5, 0]) square([6, 20]);
+		translate([i * 22 + 10, -27.5, 0]) square([6, 20]);
 	}
 }
 

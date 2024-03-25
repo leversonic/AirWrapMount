@@ -9,9 +9,9 @@ module SmoothingBrushIcon() {
 		offset(10) square([118, 64]);
 		square([118, 64]);
 	}
-	for(i = [0:3]) {
-		for(j = [0:5]) {
-			translate([j * 432 / 23 + 12, i * 81 / 6 + 12, 0]) circle(3, $fn=25);
+	for(i = [0:2]) {
+		for(j = [0:3]) {
+			translate([j * 27 + 18, i * 18 + 14, 0]) circle(5, $fn=25);
 		}
 	}
 }

@@ -3,10 +3,10 @@ innerDiameter = 30;
 
 module SmoothingDryerIcon() {
 	difference() {
-		offset(1) IconLines();
+		offset(2) IconLines();
 		IconLines();
 	}
-	translate([20, 0, 0]) square([1, 24]);
+	translate([19, 0, 0]) square([2, 24]);
 }
 
 module IconLines() {

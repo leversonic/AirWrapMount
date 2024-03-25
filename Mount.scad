@@ -37,21 +37,21 @@ module MountBody() {
 				translate([bodyBackThickness + topShelfDepth, 0, bodyBackHeight - topShelfVerticalOffset - topShelfThickness]) rotate([0, 0, 90]) linear_extrude(topShelfThickness) square([frontWidth, topShelfDepth + bodyBackThickness]);
 				translate([0, 0, bodyBackHeight - topShelfVerticalOffset]) mirror([0, 1, 0]) AngleMount(wingAngle) {
 					DiffuserSupportBeam();
-					DiffuserIcon();
+					linear_extrude(3) DiffuserIcon();
 				}
 				translate([0, frontWidth, bodyBackHeight - topShelfVerticalOffset]) AngleMount(wingAngle, -28 / PI) {
 					WideToothCombSupportBeam();
-					WideToothCombIcon();
+					linear_extrude(3) WideToothCombIcon();
 				}
 			}
 			translate(calculateIndentationCenter(0)) AccessoryIndentation();
 			translate(calculateIndentationCenter(1)) AccessoryIndentation(false);
 			translate(calculateIndentationCenter(2)) AccessoryIndentation(false);
 			translate(calculateIndentationCenter(3)) AccessoryIndentation();
-			translate([bodyBackThickness + topShelfDepth + 0.99, calculateIndentationCenter(0)[1] - 2, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([0, -90, 0]) linear_extrude(1) scale((topShelfThickness - 8) / 118) SmoothingBrushIcon();
-			translate([bodyBackThickness + topShelfDepth + 0.98, calculateIndentationCenter(1)[1] - 1, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([0, -90, 0]) linear_extrude(1) scale((topShelfThickness - 8) / 118) VolumizingBrushIcon();
-			translate([bodyBackThickness + topShelfDepth + 0.99, calculateIndentationCenter(2)[1] + 1.5, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([-90, 180, 90]) linear_extrude(1) scale((topShelfThickness - 8) / 18) BarrelIcon();
-			translate([bodyBackThickness + topShelfDepth - 0.99, calculateIndentationCenter(3)[1] - 1.5, bodyBackHeight - topShelfVerticalOffset - topShelfThickness * 3 / 4]) rotate([-90, 180, -90]) linear_extrude(1) scale((topShelfThickness - 8) / 35) SmoothingDryerIcon();
+			translate([bodyBackThickness + topShelfDepth - 3, calculateIndentationCenter(0)[1] - 2.75, bodyBackHeight - topShelfVerticalOffset + 0.02]) rotate([0, 180, 0]) linear_extrude(2) scale((topShelfThickness - 8) / 80) SmoothingBrushIcon();
+			translate([bodyBackThickness + topShelfDepth - 3, calculateIndentationCenter(1)[1] - 1.25, bodyBackHeight - topShelfVerticalOffset + 0.02]) rotate([0, 180, 0]) linear_extrude(2) scale((topShelfThickness - 8) / 80) VolumizingBrushIcon();
+			translate([bodyBackThickness + topShelfDepth - 2.5, calculateIndentationCenter(2)[1] + 1.25, bodyBackHeight - topShelfVerticalOffset + 0.02]) rotate([0, 180, 90]) linear_extrude(2) scale((topShelfThickness - 8) / 12) BarrelIcon();
+			translate([bodyBackThickness + topShelfDepth - 2.75, calculateIndentationCenter(3)[1] - 2.5, bodyBackHeight - topShelfVerticalOffset - 1.98]) rotate([0, 0, 90]) linear_extrude(2) scale((topShelfThickness - 8) / 23) SmoothingDryerIcon();
 		}
 		translate([0, 0, -indentationDepth - 0.01]) translate(calculateIndentationCenter(0)) SmoothingBrushSupportBeam();
 		translate([0, 0, -indentationDepth - 0.01]) translate(calculateIndentationCenter(1)) SmoothingDryerSupportBeam();
@@ -90,7 +90,7 @@ module AngleMount(angle, notchRotation = 0) {
 			}
 			translate([(1 + sin(angle)) * depth / 2, (tan(angle) + cos(angle)) * depth / 2, -depth / 2]) rotate([0, 45, 90 - angle]) translate([0, 0, -indentationDepth]) children(0);
 		}
-	translate([(1 + sin(angle)) * depth / 2, (tan(angle) + cos(angle)) * depth / 2, -depth / 2]) rotate([0, 45, 90 - angle]) translate([depth / 2, 0, 0]) scale([0.5, 0.5, 1]) children(1);
+	translate([(1 + sin(angle)) * depth / 2, (tan(angle) + cos(angle)) * depth / 2, -depth / 2]) rotate([0, 45, 90 - angle]) translate([depth / 2, 0, -0.1]) scale([0.5, 0.5, 1]) children(1);
 	}
 }
 

@@ -12,8 +12,8 @@ module WideToothCombIcon() {
 			square([22, 17], center=true);
 			square([20, 15], center=true);
 		}
-		for(i = [1.5:3:19.5]) {
-			translate([i - 11, 8.5, 0]) square([1, 17]);
+		for(i = [1.5:6:19.5]) {
+			translate([i - 11, 8, 0]) square([1, 17]);
 		}
 	}
 }

@@ -7,18 +7,10 @@ module DiffuserIcon() {
 		circle(11);
 		circle(10);
 	}
-	difference() {
-		circle(6.5);
-		circle(5.5);
-	}
-	circle(1.5);
-	for(i = [0:18:360]) {
-		outerRadius = i % 36 ? 8.5 : 7.75;
-		innerRadius = 3.75;
-		translate([outerRadius * cos(i), outerRadius * sin(i), 0]) circle(0.75);
-		if (i % 36) {
-			translate([innerRadius * cos(i), innerRadius * sin(i), 0]) circle(0.75);
-		}
+	circle(2.5);
+	for(i = [36:36:360]) {
+		outerRadius = 7;
+		translate([outerRadius * cos(i), outerRadius * sin(i), 0]) circle(1);
 	}
 }
 
