@@ -11,7 +11,7 @@ module SmoothingBrushIcon() {
 	}
 	for(i = [0:2]) {
 		for(j = [0:3]) {
-			translate([j * 27 + 18, i * 18 + 14, 0]) circle(5, $fn=25);
+			translate([j * 27 + 18, i * 18 + 14, 0]) circle(6, $fn=25);
 		}
 	}
 }
